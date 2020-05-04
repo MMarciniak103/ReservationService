@@ -1,8 +1,107 @@
 body {
     margin:0;
     padding:0;
-    background-size: cover;
+    /*background-size: cover;*/
     background-image: url(../imgs/apple.jpg);
-    background-position: center;
-    font-family: sans-serif;
+    position: relative;
+    /*background-position:center;*/
+    /*!*position: relative;*!*/
+    /*background-repeat: no-repeat;*/
+    /*transform: translate(0%,-20%);*/
+    font-family: Tahoma,sans-serif;
+    background-color: #F4CAC5;
+    z-index: -1;
 }
+
+.loginbox {
+    width: 320px;
+    height: 460px;
+    background: #ECE2D9;
+    color: rgba(206, 3, 3, 0.93);
+    top: 50%;
+    left: 50%;
+    /*margin: ;*/
+    position: fixed;
+    z-index: 10;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+    /*border-color: rgba(206, 3, 3, 0.93);*/
+    border-color: #dc6d0c;
+    border-style: solid;
+
+}
+
+
+.fa-user-circle{
+    color: rgba(206, 3, 3, 0.93);
+    position: relative;
+    /*top: -25px;*/
+    /*left:calc(50% - 1em);*/
+    left: 50%;
+    top: -10%;
+    transform: translate(-50%,-50%);
+}
+
+
+h1 {
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-shadow: .1rem .1rem .1rem black;
+    font-size: 2rem;
+}
+
+.loginbox p{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.loginbox input {
+    width: 100%;
+    margin-bottom: 20px;
+    font-weight: bold;
+
+}
+
+.loginbox input[type="text"],input[type="password"] {
+    border: none;
+    border-bottom: 1px solid rgba(206, 3, 3, 0.93);
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: rgba(206, 3, 3, 0.93);
+    font-size: 16px;
+}
+
+.loginbox input[type="submit"]{
+    border:none;
+    outline: none;
+    height: 40px;
+    background: #fb2525;
+    color: #ECE2D9;
+    font-size: 18px;
+    border-radius: 20px;
+}
+
+.loginbox input[type="submit"]:hover{
+    cursor: pointer;
+    background: #ff4d6d;
+    color: #ECE2D9;
+}
+
+.loginbox a{
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.loginbox a:hover{
+    color: lightblue;
+}
+
