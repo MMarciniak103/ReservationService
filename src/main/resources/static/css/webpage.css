@@ -1,4 +1,75 @@
 body {
-    color: #cbcbcb;
+    background-color: #cbcbcb;
 }
 
+
+.parallax {
+    /* The image used */
+    background-image: url(/static/imgs/doctor.jpg);
+
+    /* Set a specific height */
+    min-height: 300px;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    /*background-position:center;*/
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.presentation h1 {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 3rem;
+    letter-spacing: .3rem;
+    color: #8a36cb;
+    text-shadow: 0.1rem .1rem .4rem black;
+}
+
+.presentation p {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #6551cb;
+}
+
+.appointment-form {
+    width: 80%;
+    height: fit-content;
+    background-color: #6551cb;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    border-radius: 20px;
+}
+
+.appointment-form h2 {
+    font-weight: bold;
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: white;
+}
+
+.appointment-form p {
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+
+}
+
+.appointment-form input {
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 25px;
+}
+.appointment-form input[type="submit"]{
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-size: 1.5rem;
+    background:#8a36cb ;
+    color: white;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.appointment-form input[type="submit"]:hover {
+    background: #8a36cb;
+}

@@ -10,7 +10,10 @@ public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String specialization;
+
+    private String institution;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
@@ -19,9 +22,10 @@ public class Doctor {
     public Doctor() {
     }
 
-    public Doctor(Long id, String specialization, UserDto user) {
+    public Doctor(Long id, String specialization,String institution, UserDto user) {
         this.id = id;
         this.specialization = specialization;
+        this.institution = institution;
         this.user = user;
     }
 

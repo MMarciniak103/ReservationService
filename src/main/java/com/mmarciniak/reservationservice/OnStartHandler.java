@@ -22,8 +22,8 @@ public class OnStartHandler {
 
     @EventListener(ApplicationReadyEvent.class)
     public void fill(){
-        User user1 = new User("tom","tom123","ROLE_ADMIN");
-        User user2 = new User("mark","mark123","ROLE_CUSTOMER");
+        User user1 = new User("tom","123","ROLE_ADMIN");
+        User user2 = new User("mark","123","ROLE_CUSTOMER");
 
         userRepository.save(userDtoBuilder.userToUserDto(user1));
         userRepository.save(userDtoBuilder.userToUserDto(user2));
