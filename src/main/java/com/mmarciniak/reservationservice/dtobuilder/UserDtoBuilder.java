@@ -1,6 +1,7 @@
-package com.mmarciniak.reservationservice.entity;
+package com.mmarciniak.reservationservice.dtobuilder;
 
-import com.mmarciniak.reservationservice.model.User;
+import com.mmarciniak.reservationservice.entity.UserDto;
+import com.mmarciniak.reservationservice.model.UserPojo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -15,12 +16,12 @@ public class UserDtoBuilder {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public  UserDto userToUserDto(User user)
+    public UserDto userToUserDto(UserPojo userPojo)
     {
         UserDto userDto = new UserDto();
-        userDto.setName(user.getName());
-        userDto.setPasswordHash(passwordEncoder.encode(user.getPassword()));
-        userDto.setRole(user.getRole());
+        userDto.setName(userPojo.getName());
+        userDto.setPasswordHash(passwordEncoder.encode(userPojo.getPassword()));
+        userDto.setRole(userPojo.getRole());
 
         return userDto;
     }

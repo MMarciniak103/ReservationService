@@ -17,43 +17,58 @@
 <section class="jumbotron text-center">
     <div class="container presentation">
         <h1>IB RESERVATION SYSTEM</h1>
-        <p>Make an appointment with a specialist of your choice.
+        <p>Make an appointmentDto with a specialist of your choice.
             The service allows you to choose a convenient date and its possible cancellation.
             In addition, you have the option of monitoring all your visits.
         </p>
     </div>
-</section>
 
+</section>
 
 
 <div class="container text-center">
     <div class="row">
+
         <div class="col-5">
+            <div class="appointmentError">
+                <c:if test="${appointmentError != null}">
+                    ${appointmentError}
+                </c:if>
+            </div>
+            <div class="appointmentSuccess">
+                <c:if test="${appointmentSuccess != null}">
+                    ${appointmentSuccess}
+                </c:if>
+            </div>
             <div class="appointment-form">
                 <h2>Make an appointment</h2>
                 <p>Doctor Specialization</p>
-                <input type="text" name="specialization">
+                <select class="custom-select" id="specialization">
+                    <c:forEach var="doctor" items="${doctors}">
+                        <option value="${doctor.getSpecialization()}">${doctor.getSpecialization()}</option>
+                    </c:forEach>
+                </select>
                 <p>Date</p>
-                <input type="date" name="date">
+                <input type="date" id="date"/>
                 <p>Institution</p>
-                <input type="text" name="institution">
-                <input type="submit" value="Confirm">
+                <select class="custom-select" id="institution">
+                    <c:forEach var="doctor" items="${doctors}">
+                        <option value="${doctor.getInstitution()}">${doctor.getInstitution()}</option>
+                    </c:forEach>
+                </select>
+                <input type="submit" class="btn btn-light" onclick="makeAppointment()" value="Confirm"/>
             </div>
         </div>
         <div class="col-7">
-            Dwa
+            <p>${pageContext.request.contextPath}</p>
         </div>
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+<script src="${pageContext.request.contextPath}/js/mainPanel.js"></script>
 </body>
 </html>

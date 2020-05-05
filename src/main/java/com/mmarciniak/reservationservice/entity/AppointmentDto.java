@@ -4,31 +4,34 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-public class Appointment {
+@Table(name = "appointment")
+public class AppointmentDto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private UserDto userDto;
 
+    @ManyToOne
     @JoinColumn(name="doctor_id")
     private Doctor doctor;
 
+
     private LocalDate date;
 
-    private String institution;
 
-    public Appointment() {
+
+    public AppointmentDto() {
     }
 
-    public Appointment(Long id, UserDto userDto, Doctor doctor, LocalDate date, String institution) {
+    public AppointmentDto(Long id, UserDto userDto, Doctor doctor, LocalDate date) {
         this.id = id;
         this.userDto = userDto;
         this.doctor = doctor;
         this.date = date;
-        this.institution = institution;
     }
 
     public Long getId() {
@@ -51,6 +54,7 @@ public class Appointment {
         return doctor;
     }
 
+
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
     }
@@ -63,11 +67,4 @@ public class Appointment {
         this.date = date;
     }
 
-    public String getInstitution() {
-        return institution;
-    }
-
-    public void setInstitution(String institution) {
-        this.institution = institution;
-    }
 }

@@ -1,34 +1,20 @@
-package com.mmarciniak.reservationservice.entity;
+package com.mmarciniak.reservationservice.model;
 
-import javax.persistence.*;
-import javax.validation.Constraint;
+import java.time.LocalDate;
 
-@Entity
-@Table(name = "doctor")
-public class Doctor {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class AppointmentPojo {
 
     private String specialization;
-
+    private LocalDate date;
     private String institution;
 
-    public Doctor() {
+    public AppointmentPojo() {
     }
 
-    public Doctor(String specialization,String institution) {
+    public AppointmentPojo(String specialization, LocalDate date, String institution) {
         this.specialization = specialization;
+        this.date = date;
         this.institution = institution;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getSpecialization() {
@@ -37,6 +23,14 @@ public class Doctor {
 
     public void setSpecialization(String specialization) {
         this.specialization = specialization;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public String getInstitution() {

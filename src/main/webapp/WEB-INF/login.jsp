@@ -20,7 +20,7 @@
 </div>
 
 <div class="loginbox">
-    <i class="fa fa-user-circle fa-3x"></i>
+    <i class="fa fa-userPojo-circle fa-3x"></i>
     <h1>Login</h1>
     <form:form action="/authenticateUser" method="post">
         <p>Username</p>

@@ -5,7 +5,7 @@ body {
 
 .parallax {
     /* The image used */
-    background-image: url(/static/imgs/doctor.jpg);
+    background-image: url(../imgs/doctor.jpg);
 
     /* Set a specific height */
     min-height: 300px;
@@ -30,6 +30,21 @@ body {
     font-weight: bold;
     font-size: 1rem;
     color: #6551cb;
+}
+.appointmentError {
+     color: red;
+     text-transform: uppercase;
+     font-weight: bold;
+     font-size: 1rem;
+     margin-bottom: 10px ;
+ }
+
+.appointmentSuccess {
+    color: lawngreen;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 10px ;
 }
 
 .appointment-form {
@@ -60,6 +75,67 @@ body {
     font-size: 1rem;
     border-radius: 25px;
 }
+
+
+.custom-select {
+    position: relative;
+    height: auto;
+    font-weight: bold;
+    width: 80%;
+    font-size: 1rem;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+    background-color: white;
+    color: #8a36cb ;
+}
+
+
+.custom-select select {
+    display: none; /*hide original SELECT element: */
+}
+
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+    position: absolute;
+    content: "";
+    border: 6px solid transparent;
+    border-color: #8a36cb transparent transparent transparent;
+}
+
+.select-items {
+    position: absolute;
+    background-color: #8a36cb;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+}
+.select-hide {
+    display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+    background-color: #8a36cb;
+    color: white;
+}
+.select-selected.select-arrow-active:after {
+    border-color: transparent transparent #fff transparent;
+    top: 7px;
+}
+.select-items div,.select-selected {
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+    background-color: #8a36cb;
+    color: white;
+}
+
+
+
+
 .appointment-form input[type="submit"]{
     margin-bottom: 20px;
     margin-top: 20px;
@@ -73,3 +149,5 @@ body {
 .appointment-form input[type="submit"]:hover {
     background: #8a36cb;
 }
+
+
