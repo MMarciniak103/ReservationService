@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <title>Login Page</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/login.css">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <body>
 <div>
