@@ -30,15 +30,15 @@
     <div class="row">
 
         <div class="col-5">
-            <div class="appointmentError">
-                <c:if test="${appointmentError != null}">
-                    ${appointmentError}
-                </c:if>
+            <div class="appointmentError text-center" id="appointmentError">
+<%--                <c:if test="${appointmentError != null}">--%>
+<%--                    <p>Status: ${appointmentError}</p>--%>
+<%--                </c:if>--%>
             </div>
-            <div class="appointmentSuccess">
-                <c:if test="${appointmentSuccess != null}">
-                    ${appointmentSuccess}
-                </c:if>
+            <div class="appointmentSuccess text-center" id="appointmentSuccess">
+<%--                <c:if test="${appointmentSuccess != null}">--%>
+<%--                    <p>Status: ${appointmentSuccess}</p>--%>
+<%--                </c:if>--%>
             </div>
             <div class="appointment-form">
                 <h2>Make an appointment</h2>
@@ -56,7 +56,7 @@
                         <option value="${doctor.getInstitution()}">${doctor.getInstitution()}</option>
                     </c:forEach>
                 </select>
-                <input type="submit" class="btn btn-light" onclick="makeAppointment()" value="Confirm"/>
+                <input type="button" class="btn btn-light" onclick="makeAppointment()" value="Confirm"/>
             </div>
         </div>
         <div class="col-7">

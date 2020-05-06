@@ -1,5 +1,6 @@
 package com.mmarciniak.reservationservice.controller;
 
+import com.google.gson.Gson;
 import com.mmarciniak.reservationservice.dtobuilder.AppointmentDtoBuilder;
 import com.mmarciniak.reservationservice.entity.AppointmentDto;
 import com.mmarciniak.reservationservice.entity.Doctor;
@@ -11,7 +12,9 @@ import com.mmarciniak.reservationservice.service.AppointmentService;
 import com.mmarciniak.reservationservice.service.DoctorService;
 import com.mmarciniak.reservationservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -42,51 +46,39 @@ public class PanelController {
     }
 
     @RequestMapping("/")
-    public String loadMainPage(HttpServletRequest request,Model model)
-    {
+    public String loadMainPage(HttpServletRequest request, Model model) {
         List<Doctor> doctors = doctorService.findAll();
-        model.addAttribute("doctors",doctors);
-
-        Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
-        if (inputFlashMap != null) {
-            if (inputFlashMap.containsKey("appointmentError")) {
-                String message = (String) inputFlashMap.get("appointmentError");
-                model.addAttribute("appointmentError", message);
-            }
-            else if (inputFlashMap.containsKey("appointmentSuccess")){
-                String message = (String) inputFlashMap.get("appointmentSuccess");
-                model.addAttribute("appointmentSuccess",message);
-            }
-        }
-
+        model.addAttribute("doctors", doctors);
 
         return "webpage";
     }
 
 
-    @RequestMapping(value = "/makeAppointment",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String makeAppointment(@RequestBody AppointmentPojo appointment, HttpServletRequest httpServletRequest, RedirectAttributes redirectAttributes){
+    @RequestMapping(value = "/makeAppointment", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity makeAppointment(@RequestBody AppointmentPojo appointment, HttpServletRequest httpServletRequest) {
 
         String userName = httpServletRequest.getUserPrincipal().getName();
 
         UserDto user = userService.getUserByName(userName).get();
 
+        Map<String, String> result = new HashMap<>();
+        Gson gson = new Gson();
+        String status;
 
         try {
             AppointmentDto appointmentDto = validateAppointment(appointment);
             appointmentDto.setUserDto(user);
             appointmentService.save(appointmentDto);
 
+            result.put("message", "Appointment was successful");
+            status = gson.toJson(result);
+            return new ResponseEntity(status, HttpStatus.OK);
+
         } catch (AppointmentDateInvalid | InvalidDoctorInfo error) {
-//                re.addAttribute("appointmentError",error.getMessage());
-            redirectAttributes.addFlashAttribute("appointmentError",error.getMessage());
+            result.put("message", error.getMessage());
+            status = gson.toJson(result);
+            return new ResponseEntity(status, HttpStatus.BAD_REQUEST);
         }
-
-//        model.addAttribute("appointmentSuccess","Appointment was successful");
-        redirectAttributes.addFlashAttribute("appointmentSuccess","Appointment was successful");
-
-
-        return "redirect:/";
     }
 
 
@@ -94,13 +86,13 @@ public class PanelController {
         String specialization = appointment.getSpecialization();
         String institution = appointment.getInstitution();
         Optional<Doctor> doctor = doctorService.findByInstitutionAndSpecialization(institution, specialization);
-        if(!doctor.isPresent()){
-            throw new InvalidDoctorInfo("There is no "+specialization+" working in "+institution);
+        if (!doctor.isPresent()) {
+            throw new InvalidDoctorInfo("There is no " + specialization + " working in " + institution);
         }
 
         Optional<AppointmentDto> appointmentByDoctor = appointmentService.findAppointmentByDoctorAndDate(doctor.get(), appointment.getDate());
-        if(appointmentByDoctor.isPresent()){
-            throw new AppointmentDateInvalid(appointment.getDate()+" is taken.");
+        if (appointmentByDoctor.isPresent()) {
+            throw new AppointmentDateInvalid(appointment.getDate() + " is taken.");
         }
 
 
