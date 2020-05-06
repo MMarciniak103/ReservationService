@@ -46,4 +46,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     public List<AppointmentDto> findUserAppointments(UserDto user) {
         return appointmentRepository.findAppointmentDtosByUserDto(user);
     }
+
+    @Override
+    public void deleteAppointmentById(Long id) {
+        appointmentRepository.deleteById(id);
+    }
 }

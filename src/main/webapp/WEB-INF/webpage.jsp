@@ -14,7 +14,7 @@
         let userName = "${pageContext.request.userPrincipal.name}"
     </script>
 </head>
-<body>
+<body onload="getAppointments();">
 
 <div class="parallax"></div>
 
@@ -72,17 +72,10 @@
                         <th scope="col">Date</th>
                         <th scope="col">Doctor</th>
                         <th scope="col">Institution</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="appointment" items="${userAppointments}">
-
-                            <tr>
-                                <td>${appointment.getDate()}</td>
-                                <td>${appointment.getDoctor().getSpecialization()}</td>
-                                <td>${appointment.getDoctor().getInstitution()}</td>
-                            </tr>
-                        </c:forEach>
                     </tbody>
                 </table>
             </div>

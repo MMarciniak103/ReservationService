@@ -23,13 +23,8 @@ function makeAppointment() {
                 successLabel.removeChild(messageNode);
             }, 4000);
 
+            getAppointments();
 
-            $.ajax('/getAppointments/' + userName, {
-                type: 'GET',
-                success: function (data) {
-                    populateTable(data);
-                }
-            });
         },
         error: function (result) {
 
@@ -55,12 +50,22 @@ function reloadCss() {
     }
 }
 
+function getAppointments(){
+    $.ajax('/getAppointments/' + userName, {
+        type: 'GET',
+        success: function (data) {
+            populateTable(data);
+        }
+    });
+}
+
 function populateTable(data) {
 
     let table = document.getElementById("appointment-table");
     let tbody = table.lastElementChild;
 
     tbody.innerHTML = "";
+
 
 
     data.forEach(function (value, index) {
@@ -73,6 +78,22 @@ function populateTable(data) {
         specializationCell.innerText = value.doctor.specialization;
         let institutionCell = row.insertCell(2);
         institutionCell.innerText = value.doctor.institution;
+        let cancelCell =  row.insertCell(3);
+
+        let cancelBtn = document.createElement("input");
+        cancelBtn.type = "button";
+        cancelBtn.className = "btn";
+        cancelBtn.value = "Cancel";
+        cancelBtn.onclick = (function() {
+            $.ajax("/cancelAppointment/"+value.id,{
+                type:'DELETE',
+                success: function () {
+                    getAppointments();
+                }
+            })
+        });
+
+        cancelCell.appendChild(cancelBtn);
 
     });
 }

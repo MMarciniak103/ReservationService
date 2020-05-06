@@ -46,12 +46,12 @@ public class PanelController {
         List<Doctor> doctors = doctorService.findAll();
         model.addAttribute("doctors", doctors);
 
-
-        String userName = httpServletRequest.getUserPrincipal().getName();
-        UserDto user = userService.getUserByName(userName).get();
-
-        List<AppointmentDto> userAppointments = getUserAppointments(user);
-        model.addAttribute("userAppointments",userAppointments);
+//
+//        String userName = httpServletRequest.getUserPrincipal().getName();
+//        UserDto user = userService.getUserByName(userName).get();
+//
+//        List<AppointmentDto> userAppointments = getUserAppointments(user);
+//        model.addAttribute("userAppointments",userAppointments);
 
         return "webpage";
     }
@@ -70,6 +70,13 @@ public class PanelController {
         List<AppointmentDto> userAppointments = getUserAppointments(user);
 
         return userAppointments;
+    }
+
+
+    @RequestMapping(value = "/cancelAppointment/{id}",method = RequestMethod.DELETE)
+    public ResponseEntity cancelAppointment(@PathVariable Long id){
+            appointmentService.deleteAppointmentById(id);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 
