@@ -2,12 +2,14 @@ package com.mmarciniak.reservationservice.service.impl;
 
 import com.mmarciniak.reservationservice.entity.AppointmentDto;
 import com.mmarciniak.reservationservice.entity.Doctor;
+import com.mmarciniak.reservationservice.entity.UserDto;
 import com.mmarciniak.reservationservice.repository.AppointmentRepository;
 import com.mmarciniak.reservationservice.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,5 +40,10 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public Optional<AppointmentDto> findAppointmentByDoctorAndDate(Doctor doctor, LocalDate date) {
         return appointmentRepository.findAppointmentByDoctorAndDate(doctor,date);
+    }
+
+    @Override
+    public List<AppointmentDto> findUserAppointments(UserDto user) {
+        return appointmentRepository.findAppointmentDtosByUserDto(user);
     }
 }

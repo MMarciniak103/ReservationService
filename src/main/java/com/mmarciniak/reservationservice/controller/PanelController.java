@@ -17,11 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.support.RequestContextUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -46,11 +42,34 @@ public class PanelController {
     }
 
     @RequestMapping("/")
-    public String loadMainPage(HttpServletRequest request, Model model) {
+    public String loadMainPage(Model model,HttpServletRequest httpServletRequest) {
         List<Doctor> doctors = doctorService.findAll();
         model.addAttribute("doctors", doctors);
 
+
+        String userName = httpServletRequest.getUserPrincipal().getName();
+        UserDto user = userService.getUserByName(userName).get();
+
+        List<AppointmentDto> userAppointments = getUserAppointments(user);
+        model.addAttribute("userAppointments",userAppointments);
+
         return "webpage";
+    }
+
+    private List<AppointmentDto> getUserAppointments(UserDto user){
+
+        List<AppointmentDto> userAppointments = appointmentService.findUserAppointments(user);
+        return userAppointments;
+    }
+
+
+    @RequestMapping(value = "/getAppointments/{userName}",method = RequestMethod.GET)
+    @ResponseBody
+    public List<AppointmentDto> getAppointments(@PathVariable String userName){
+        UserDto user = userService.getUserByName(userName).get();
+        List<AppointmentDto> userAppointments = getUserAppointments(user);
+
+        return userAppointments;
     }
 
 

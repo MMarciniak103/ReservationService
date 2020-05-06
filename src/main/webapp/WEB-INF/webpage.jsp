@@ -9,6 +9,10 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/webpage.css">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <script>
+        let userName = "${pageContext.request.userPrincipal.name}"
+    </script>
 </head>
 <body>
 
@@ -60,7 +64,29 @@
             </div>
         </div>
         <div class="col-7">
-            <p>${pageContext.request.contextPath}</p>
+
+            <div class="appointment-container">
+                <table class="table" id="appointment-table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Doctor</th>
+                        <th scope="col">Institution</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="appointment" items="${userAppointments}">
+
+                            <tr>
+                                <td>${appointment.getDate()}</td>
+                                <td>${appointment.getDoctor().getSpecialization()}</td>
+                                <td>${appointment.getDoctor().getInstitution()}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </div>
 </div>
