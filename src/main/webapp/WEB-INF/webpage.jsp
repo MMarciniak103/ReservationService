@@ -64,8 +64,8 @@
             </div>
         </div>
         <div class="col-7">
-
-            <div class="appointment-container">
+            <div class="appointment-container text-center">
+                <h1>Your appointments</h1>
                 <table class="table" id="appointment-table">
                     <thead>
                     <tr>
@@ -75,7 +75,7 @@
                         <th scope="col"></th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-center">
                     </tbody>
                 </table>
             </div>

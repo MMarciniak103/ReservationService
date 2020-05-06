@@ -151,3 +151,29 @@ body {
 }
 
 
+.appointment-container h1{
+    text-transform: uppercase;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #6551cb;
+}
+
+.table thead{
+    background-color: #6551cb;
+    color: white;
+}
+
+.table tbody{
+    background-color: white;
+    color: #8a36cb;
+}
+
+.table tbody .btn{
+    background-color:#8a36cb ;
+    color: white;
+    border-radius: 20px;
+}
+
+.table tbody .btn:hover {
+    background-color: #6551cb;
+}
