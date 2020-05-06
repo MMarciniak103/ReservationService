@@ -1,9 +1,12 @@
 function makeAppointment() {
     let specialization = document.getElementById("specialization");
     let date = document.getElementById("date");
+    let time = document.getElementById("time");
     let institution = document.getElementById("institution");
     let successLabel = document.getElementById("appointmentSuccess");
     let errorLabel = document.getElementById("appointmentError");
+
+    console.log(time.value);
 
     $.ajax('/makeAppointment', {
         type: 'POST',
@@ -11,6 +14,7 @@ function makeAppointment() {
         data: JSON.stringify({
             specialization: specialization.value,
             date: date.value,
+            time:time.value,
             institution: institution.value
         }),
         success: function (result) {
@@ -73,7 +77,7 @@ function populateTable(data) {
         let row = tbody.insertRow(-1);
 
         let dateCell = row.insertCell(0);
-        dateCell.innerText = value.date;
+        dateCell.innerText = value.date +" "+value.time;
         let specializationCell = row.insertCell(1);
         specializationCell.innerText = value.doctor.specialization;
         let institutionCell = row.insertCell(2);

@@ -116,9 +116,9 @@ public class PanelController {
             throw new InvalidDoctorInfo("There is no " + specialization + " working in " + institution);
         }
 
-        Optional<AppointmentDto> appointmentByDoctor = appointmentService.findAppointmentByDoctorAndDate(doctor.get(), appointment.getDate());
+        Optional<AppointmentDto> appointmentByDoctor = appointmentService.findAppointmentByDoctorAndDateAndTime(doctor.get(), appointment.getDate(),appointment.getTime());
         if (appointmentByDoctor.isPresent()) {
-            throw new AppointmentDateInvalid(appointment.getDate() + " is taken.");
+            throw new AppointmentDateInvalid(appointment.getDate()+" "+appointment.getTime() + " is taken.");
         }
 
 

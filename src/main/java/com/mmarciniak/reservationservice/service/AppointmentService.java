@@ -6,6 +6,7 @@ import com.mmarciniak.reservationservice.entity.UserDto;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,7 +16,7 @@ public interface AppointmentService{
     Optional<AppointmentDto> findById(Long id);
     AppointmentDto save(AppointmentDto appointmentDto);
     Optional<AppointmentDto> findAppointmentByDoctor(Doctor doctor);
-    Optional<AppointmentDto> findAppointmentByDoctorAndDate(Doctor doctor, LocalDate date);
+    Optional<AppointmentDto> findAppointmentByDoctorAndDateAndTime(Doctor doctor, LocalDate date, LocalTime time);
     List<AppointmentDto> findUserAppointments(UserDto user);
     void deleteAppointmentById(Long id);
 }

@@ -2,6 +2,7 @@ package com.mmarciniak.reservationservice.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "appointment")
@@ -21,17 +22,18 @@ public class AppointmentDto {
 
 
     private LocalDate date;
-
+    private LocalTime time;
 
 
     public AppointmentDto() {
     }
 
-    public AppointmentDto(Long id, UserDto userDto, Doctor doctor, LocalDate date) {
+    public AppointmentDto(Long id, UserDto userDto, Doctor doctor, LocalDate date, LocalTime time) {
         this.id = id;
         this.userDto = userDto;
         this.doctor = doctor;
         this.date = date;
+        this.time = time;
     }
 
     public Long getId() {
@@ -67,4 +69,11 @@ public class AppointmentDto {
         this.date = date;
     }
 
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
+    }
 }

@@ -54,6 +54,8 @@
                 </select>
                 <p>Date</p>
                 <input type="date" id="date"/>
+                <p>Time</p>
+                <input type="time" id="time" step="3600"/>
                 <p>Institution</p>
                 <select class="custom-select" id="institution">
                     <c:forEach var="doctor" items="${doctors}">

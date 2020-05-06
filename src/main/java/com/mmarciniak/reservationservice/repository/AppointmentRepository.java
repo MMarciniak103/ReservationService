@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,7 +15,7 @@ import java.util.Optional;
 public interface AppointmentRepository extends CrudRepository<AppointmentDto,Long> {
 
     Optional<AppointmentDto> findAppointmentByDoctor(Doctor doctor);
-    Optional<AppointmentDto> findAppointmentByDoctorAndDate(Doctor doctor, LocalDate date);
+    Optional<AppointmentDto> findAppointmentByDoctorAndDateAndTime(Doctor doctor, LocalDate date, LocalTime time);
     List<AppointmentDto> findAppointmentDtosByUserDto(UserDto user);
     void deleteById(Long id);
 

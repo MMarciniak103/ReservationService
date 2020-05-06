@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,9 +39,10 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public Optional<AppointmentDto> findAppointmentByDoctorAndDate(Doctor doctor, LocalDate date) {
-        return appointmentRepository.findAppointmentByDoctorAndDate(doctor,date);
+    public Optional<AppointmentDto> findAppointmentByDoctorAndDateAndTime(Doctor doctor, LocalDate date, LocalTime time) {
+        return appointmentRepository.findAppointmentByDoctorAndDateAndTime(doctor,date,time);
     }
+
 
     @Override
     public List<AppointmentDto> findUserAppointments(UserDto user) {
