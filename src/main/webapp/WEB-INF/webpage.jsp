@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Login Page</title>
+    <title>Appointments Page</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/webpage.css">
@@ -29,6 +29,9 @@
 
 </section>
 
+<div id="time-panel">
+
+</div>
 
 <div class="container text-center">
     <div class="row">
@@ -54,15 +57,15 @@
                 </select>
                 <p>Date</p>
                 <input type="date" id="date"/>
-                <p>Time</p>
-                <input type="time" id="time" step="3600"/>
+<%--                <p>Time</p>--%>
+<%--                <input type="time" id="time" step="3600" min="8:00" max="16:00" required/>--%>
                 <p>Institution</p>
                 <select class="custom-select" id="institution">
                     <c:forEach var="doctor" items="${doctors}">
                         <option value="${doctor.getInstitution()}">${doctor.getInstitution()}</option>
                     </c:forEach>
                 </select>
-                <input type="button" class="btn btn-light" onclick="makeAppointment()" value="Confirm"/>
+                <input type="button" class="btn btn-light" onclick="chooseTime()" value="Confirm"/>
             </div>
         </div>
         <div class="col-7">

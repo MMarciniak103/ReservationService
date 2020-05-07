@@ -1,22 +1,12 @@
-function makeAppointment() {
-    let specialization = document.getElementById("specialization");
-    let date = document.getElementById("date");
-    let time = document.getElementById("time");
-    let institution = document.getElementById("institution");
+function makeAppointment(appointment) {
+
     let successLabel = document.getElementById("appointmentSuccess");
     let errorLabel = document.getElementById("appointmentError");
-
-    console.log(time.value);
 
     $.ajax('/makeAppointment', {
         type: 'POST',
         contentType: 'application/json',
-        data: JSON.stringify({
-            specialization: specialization.value,
-            date: date.value,
-            time:time.value,
-            institution: institution.value
-        }),
+        data: appointment,
         success: function (result) {
 
             let messageNode = document.createTextNode(JSON.parse(result).message);
@@ -100,4 +90,83 @@ function populateTable(data) {
         cancelCell.appendChild(cancelBtn);
 
     });
+}
+
+
+
+function chooseTime()
+{
+
+    let specialization = document.getElementById("specialization");
+    let date = document.getElementById("date");
+    let institution = document.getElementById("institution");
+
+    $.ajax("/timePanel",{
+        type:'GET',
+        success:function (data) {
+            console.log($("#time-panel"));
+            $("#time-panel").empty();
+            $("#time-panel").append(data);
+            reloadCss();
+
+            $.ajax("/availableHours",{
+                type:"POST",
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    specialization: specialization.value,
+                    date: date.value,
+                    time:null,
+                    institution: institution.value
+                }),
+                success: function (data) {
+                    console.log(data);
+                    for(let i =7; i< 17; i++){
+                       let hourOption = document.createElement("option");
+                       if (i <= 9)
+                            hourOption.value = "0"+i+":00:00";
+                       else
+                           hourOption.value = i+":00:00";
+                       hourOption.text = i+":00";
+                       hourOption.id =  "hour-option" + i.toString();
+                       hourOption.style.color = '#03b406';
+                       $("#time-select").append(hourOption);
+                    }
+
+                    data.forEach(function (value,index) {
+                       // let appointment = JSON.parse(value);
+                       console.log("index: "+index +"  value: "+value.time);
+                       console.log(value.time.split(":"));
+
+                       let timeValue = parseInt(value.time.split(":")[0]);
+                       let option = document.getElementById("hour-option"+timeValue);
+                       option.style.color = "red";
+                    });
+                    reloadCss();
+                }
+            });
+
+
+
+        }
+    });
+}
+
+function confirmTime() {
+    let specialization = document.getElementById("specialization");
+    let date = document.getElementById("date");
+    let institution = document.getElementById("institution");
+    let time = document.getElementById("time-select");
+
+    console.log(time.value);
+
+    let appointment = JSON.stringify({
+        specialization: specialization.value,
+        date: date.value,
+        time:time.value,
+        institution: institution.value
+    });
+
+    $("#time-panel").empty();
+
+    makeAppointment(appointment);
 }

@@ -50,6 +50,13 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
+    public List<AppointmentDto> findAppointmentsByDateAndDoctor(LocalDate date, Doctor doctor) {
+        return appointmentRepository.findAppointmentDtosByDateAndDoctor(date,doctor);
+    }
+
+
+
+    @Override
     public void deleteAppointmentById(Long id) {
         appointmentRepository.deleteById(id);
     }

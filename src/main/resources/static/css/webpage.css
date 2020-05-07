@@ -48,7 +48,7 @@ body {
 }
 
 .appointment-form {
-    width: 80%;
+    width: fit-content;
     height: fit-content;
     background-color: #6551cb;
     padding-top: 5px;
@@ -176,4 +176,29 @@ body {
 
 .table tbody .btn:hover {
     background-color: #6551cb;
+}
+
+
+#time-panel {
+    width: 65%;
+    height: calc(50% - 200px);
+    z-index: 100;
+    position: absolute;
+
+}
+
+#time-panel #chooseTimePanel {
+    width: 200px;
+    height: fit-content;
+    background-color: #6551cb;
+    color: white;
+    border-color: #8a36cb;
+    border-width: 2px;
+    border-style: solid;
+
+}
+
+#time-panel #chooseTimePanel #time-select {
+    font-weight: bold;
+    font-size: 1rem;
 }

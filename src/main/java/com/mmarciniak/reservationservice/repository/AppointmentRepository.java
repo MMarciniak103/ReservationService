@@ -17,6 +17,7 @@ public interface AppointmentRepository extends CrudRepository<AppointmentDto,Lon
     Optional<AppointmentDto> findAppointmentByDoctor(Doctor doctor);
     Optional<AppointmentDto> findAppointmentByDoctorAndDateAndTime(Doctor doctor, LocalDate date, LocalTime time);
     List<AppointmentDto> findAppointmentDtosByUserDto(UserDto user);
+    List<AppointmentDto> findAppointmentDtosByDateAndDoctor(LocalDate date,Doctor doctor);
     void deleteById(Long id);
 
 }

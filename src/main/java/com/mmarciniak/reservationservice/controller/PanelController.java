@@ -20,10 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class PanelController {
@@ -91,6 +88,13 @@ public class PanelController {
         Gson gson = new Gson();
         String status;
 
+        if(appointment.getTime() == null || appointment.getDate() == null){
+            result.put("message","You must provide date and time");
+            status = gson.toJson(result);
+            return new ResponseEntity(status,HttpStatus.BAD_REQUEST);
+        }
+
+
         try {
             AppointmentDto appointmentDto = validateAppointment(appointment);
             appointmentDto.setUserDto(user);
@@ -126,5 +130,27 @@ public class PanelController {
 
         appointmentDto.setDoctor(doctor.get());
         return appointmentDto;
+    }
+
+
+    @RequestMapping(value = "/timePanel",method = RequestMethod.GET)
+    public String getTimePanel(){
+        return "chooseTimePanel";
+    }
+
+
+    @RequestMapping(value = "/availableHours",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<AppointmentDto> getAvailableHours(@RequestBody AppointmentPojo appointmentPojo){
+
+        Optional<Doctor> doctor = doctorService.findByInstitutionAndSpecialization(appointmentPojo.getInstitution(),appointmentPojo.getSpecialization());
+
+        if(doctor.isPresent()) {
+            List<AppointmentDto> appointmentsByDate = appointmentService.findAppointmentsByDateAndDoctor(appointmentPojo.getDate(),doctor.get());
+            return  appointmentsByDate;
+        }
+
+        return new ArrayList<AppointmentDto>();
+
     }
 }
