@@ -21,6 +21,7 @@
 
 <section class="jumbotron text-center">
     <div class="container presentation">
+        <a id="logout-link" style="float:right;" href="<c:url value="/logout" />">Logout</a>
         <h1>IB RESERVATION SYSTEM</h1>
         <p>Make an appointment with a specialist of your choice.
             The service allows you to choose a convenient date and its possible cancellation.

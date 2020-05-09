@@ -8,13 +8,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class LoginController {
 
-    /**
-     * Method that handles user authentication
-     * @return login page view.
-     */
     @RequestMapping(path = "/login",method = RequestMethod.GET)
     public String showLoginPage(){
         return "login";
+    }
+
+    @RequestMapping(path = "/registration",method = RequestMethod.GET)
+    public String registrationForm(){
+        return "registrationForm";
     }
 
 }

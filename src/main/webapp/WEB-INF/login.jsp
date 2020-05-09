@@ -28,8 +28,7 @@
         <p>Password</p>
         <input type="password" name="password" placeholder="Enter Password"/>
         <input type="submit" value="Login">
-        <a href="#">Forgot password?</a><br>
-        <a href="#">Don't have an account?</a>
+        <a href="/registration">Don't have an account?</a>
     </form:form>
 </div>
 </body>
