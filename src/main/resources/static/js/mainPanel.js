@@ -172,9 +172,3 @@ function confirmTime() {
 }
 
 
-function loadAdminPage(){
-
-    $.ajax("/adminPage",{
-        type:'GET'});
-
-}

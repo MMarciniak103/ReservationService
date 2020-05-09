@@ -14,6 +14,8 @@
 
 
 <div class="container">
+        <div class="appointmentError text-center" id="appointmentError">
+        </div>
         <h1 class="text-center">Add Doctor</h1>
         <div class="form-group text-center">
             <label>Specialization</label>
@@ -22,18 +24,25 @@
 
         <div class="form-group text-center">
             <label>Institution</label>
-            <input type="text" class="form-control text-center" name="institution">
+            <input type="text" class="form-control text-center" id="institution">
         </div>
         <div class="text-center">
-            <input class="btn btn-primary" type="submit" onclick="addDoctor()" value="Add">
+            <input class="btn btn-primary" type="button" onclick="addDoctor()" value="Add">
         </div>
 
 </div>
 
 
+<div class="form-group container text-center success-label">
+    <div class="form-group text-center">
+    <label id="institution-label"></label><br>
+    <label id="specialization-label"></label>
+    </div>
+</div>
+
 <div class="btn-container text-center">
-    <div >
-        <a class="btn btn-outline-light btn-lg " href="webpage.jsp">Go Back</a>
+    <div>
+        <a class="btn btn-outline-light btn-lg " href="/">Go Back</a>
     </div>
 </div>
 
@@ -42,8 +51,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-
-<script src="${pageContext.request.contextPath}/static/js/adminPage.js"></script>
-<%--<script src="${pageContext.request.contextPath}/static/js/mainPanel.js"></script>--%>
+<script src="${pageContext.request.contextPath}/js/adminPage.js"></script>
+<script src="${pageContext.request.contextPath}/js/mainPanel.js"></script>
 </body>
 </html>

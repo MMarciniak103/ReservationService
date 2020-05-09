@@ -17,18 +17,6 @@ div.form-group input {
     border-radius: 25px;
 }
 
-div.form-group select {
-    height: auto;
-    font-weight: 700;
-    font-size: 1rem;
-}
-
-div.form-group select {
-    -webkit-border-radius: 25px;
-    -moz-border-radius: 25px;
-    border-radius: 25px;
-}
-
 
 
 h1 {
@@ -53,7 +41,7 @@ label {
     text-shadow: .1rem .1rem .6rem black;
     background-color: #6551cb;
     font-size: 1.5rem;
-    font-weight: 700rem;
+    font-weight: bold;
     border-radius: 0;
     border-width: medium;
     border-color: white;
@@ -66,4 +54,16 @@ label {
     box-shadow: .1rem .1rem .4rem black;
     border-color: black;
     color: black;
+}
+
+.appointmentError {
+    color: red;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 10px ;
+}
+
+.success-label label {
+    color: #02e821;
 }

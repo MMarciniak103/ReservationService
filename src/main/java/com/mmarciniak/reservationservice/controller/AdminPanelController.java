@@ -35,7 +35,7 @@ public class AdminPanelController {
     public ResponseEntity addDoctor(@RequestBody Doctor doctor){
 
 
-        if(doctor.getInstitution() == null || doctor.getSpecialization() == null){
+        if(doctor.getInstitution().isEmpty() || doctor.getSpecialization().isEmpty()){
             Map<String, String> result = new HashMap<>();
             Gson gson = new Gson();
             String status;
