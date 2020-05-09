@@ -1,5 +1,6 @@
 body {
     background-color: #cbcbcb;
+    width: 100%;
 }
 
 
@@ -208,15 +209,21 @@ body {
 }
 
 
-/*.footer-page {*/
-/*    background-color: #8a36cb;*/
-/*}*/
+div.footer-page {
+    margin-top: 20px;
+    height: 100px;
+    /*padding-top: 20px;*/
+    background-color: #6551cb;
+}
 
 .footer-page p {
+    padding-top: 40px;
     text-transform: uppercase;
     font-weight: bold;
     font-size: 1rem;
-    color: #6551cb;
+
+    color: white;
+    width: 100%;
 }
 
 .admin-btn {

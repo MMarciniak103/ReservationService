@@ -98,11 +98,14 @@
 <%--     </div>--%>
 <%--</section>--%>
 
-<section class="jumbotron text-center">
-    <div class="container footer-page">
-        <p>Remember to drink 2,5l of water daily!</p>
+    <div class="footer-page text-center" style="float: bottom">
+    <div class="row">
+        <div class="col-12">
+            <p>Remember to drink 2,5l of water daily!</p>
+        </div>
     </div>
-</section>
+    </div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
