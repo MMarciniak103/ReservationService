@@ -170,3 +170,11 @@ function confirmTime() {
 
     makeAppointment(appointment);
 }
+
+
+function loadAdminPage(){
+
+    $.ajax("/adminPage",{
+        type:'GET'});
+
+}

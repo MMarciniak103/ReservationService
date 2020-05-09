@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -21,31 +22,34 @@
 <section class="jumbotron text-center">
     <div class="container presentation">
         <h1>IB RESERVATION SYSTEM</h1>
-        <p>Make an appointmentDto with a specialist of your choice.
+        <p>Make an appointment with a specialist of your choice.
             The service allows you to choose a convenient date and its possible cancellation.
             In addition, you have the option of monitoring all your visits.
         </p>
+
+        <sec:authorize access="hasRole('ADMIN')">
+            <form:form method="get" action="/adminPage">
+             <input type="submit" class="btn btn-light admin-btn" value="Admin Panel"/>
+            </form:form>
+        </sec:authorize>
     </div>
 
 </section>
 
-<div id="time-panel">
-
-</div>
-
 <div class="container text-center">
     <div class="row">
+        <div id="time-panel">
 
+        </div>
+    </div>
+</div>
+<div class="container text-center main-container">
+
+    <div class="row">
         <div class="col-5">
             <div class="appointmentError text-center" id="appointmentError">
-<%--                <c:if test="${appointmentError != null}">--%>
-<%--                    <p>Status: ${appointmentError}</p>--%>
-<%--                </c:if>--%>
             </div>
             <div class="appointmentSuccess text-center" id="appointmentSuccess">
-<%--                <c:if test="${appointmentSuccess != null}">--%>
-<%--                    <p>Status: ${appointmentSuccess}</p>--%>
-<%--                </c:if>--%>
             </div>
             <div class="appointment-form">
                 <h2>Make an appointment</h2>
@@ -57,8 +61,6 @@
                 </select>
                 <p>Date</p>
                 <input type="date" id="date"/>
-<%--                <p>Time</p>--%>
-<%--                <input type="time" id="time" step="3600" min="8:00" max="16:00" required/>--%>
                 <p>Institution</p>
                 <select class="custom-select" id="institution">
                     <c:forEach var="doctor" items="${doctors}">
@@ -88,6 +90,18 @@
         </div>
     </div>
 </div>
+
+<%--<section class="jumbotron text-center footer-container">--%>
+<%--     <div class="container footer">--%>
+<%--         <p>Remember to drink 2,5l of water daily!</p>--%>
+<%--     </div>--%>
+<%--</section>--%>
+
+<section class="jumbotron text-center">
+    <div class="container footer-page">
+        <p>Remember to drink 2,5l of water daily!</p>
+    </div>
+</section>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"

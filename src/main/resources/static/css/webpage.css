@@ -54,6 +54,7 @@ body {
     padding-top: 5px;
     padding-bottom: 10px;
     border-radius: 20px;
+    z-index: 15;
 }
 
 .appointment-form h2 {
@@ -74,6 +75,7 @@ body {
     font-weight: bold;
     font-size: 1rem;
     border-radius: 25px;
+    z-index: 10;
 }
 
 
@@ -110,7 +112,7 @@ body {
     top: 100%;
     left: 0;
     right: 0;
-    z-index: 99;
+    /*z-index: 99;*/
 }
 .select-hide {
     display: none;
@@ -134,7 +136,9 @@ body {
 }
 
 
-
+.main-container{
+    z-index: 100;
+}
 
 .appointment-form input[type="button"]{
     margin-bottom: 20px;
@@ -182,8 +186,8 @@ body {
 #time-panel {
     width: 65%;
     height: calc(50% - 200px);
-    z-index: 100;
-    position: absolute;
+    /*z-index: 100;*/
+    /*position: absolute;*/
 
 }
 
@@ -201,4 +205,22 @@ body {
 #time-panel #chooseTimePanel #time-select {
     font-weight: bold;
     font-size: 1rem;
+}
+
+
+/*.footer-page {*/
+/*    background-color: #8a36cb;*/
+/*}*/
+
+.footer-page p {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1rem;
+    color: #6551cb;
+}
+
+.admin-btn {
+    border-radius: 20px;
+    color: #8a36cb;
+    font-size: 1.5rem;
 }
