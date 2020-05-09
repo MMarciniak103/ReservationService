@@ -28,8 +28,11 @@
         <p>Password</p>
         <input type="password" name="password" placeholder="Enter Password"/>
         <input type="submit" value="Login">
-        <a href="/registration">Don't have an account?</a>
     </form:form>
+<%--    <form:form action="/registration" method="GET">--%>
+<%--        <input type="submit" value="Create Account">--%>
+<%--    </form:form>--%>
+    <a href="/registration">Doesn't have account?</a>
 </div>
 </body>
 </html>
