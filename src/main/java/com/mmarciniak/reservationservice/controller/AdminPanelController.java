@@ -35,11 +35,19 @@ public class AdminPanelController {
     public ResponseEntity addDoctor(@RequestBody Doctor doctor){
 
 
-        if(doctor.getInstitution().isEmpty() || doctor.getSpecialization().isEmpty()){
+        if(doctor.getInstitution().isEmpty() || doctor.getSpecialization().isEmpty() || doctor.getWorkingFrom() == 0 || doctor.getWorkingTo() == 0){
             Map<String, String> result = new HashMap<>();
             Gson gson = new Gson();
             String status;
-            result.put("message","Doctor must have specialization and institution");
+            result.put("message","Doctor must have specialization, institution and working hours");
+            status = gson.toJson(result);
+            return new ResponseEntity(status, HttpStatus.BAD_REQUEST);
+        }
+        else if(doctor.getWorkingTo() < doctor.getWorkingFrom()){
+            Map<String, String> result = new HashMap<>();
+            Gson gson = new Gson();
+            String status;
+            result.put("message","Doctor cannot end work before he starts it");
             status = gson.toJson(result);
             return new ResponseEntity(status, HttpStatus.BAD_REQUEST);
         }

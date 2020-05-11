@@ -14,29 +14,38 @@
 
 
 <div class="container">
-        <div class="appointmentError text-center" id="appointmentError">
-        </div>
-        <h1 class="text-center">Add Doctor</h1>
-        <div class="form-group text-center">
-            <label>Specialization</label>
-            <input type="text" class="form-control text-center" id="specialization">
-        </div>
+    <div class="appointmentError text-center" id="appointmentError">
+    </div>
+    <h1 class="text-center">Add Doctor</h1>
+    <div class="form-group text-center">
+        <label>Specialization</label>
+        <input type="text" class="form-control text-center" id="specialization">
+    </div>
 
-        <div class="form-group text-center">
-            <label>Institution</label>
-            <input type="text" class="form-control text-center" id="institution">
-        </div>
-        <div class="text-center">
-            <input class="btn btn-primary" type="button" onclick="addDoctor()" value="Add">
-        </div>
+    <div class="form-group text-center">
+        <label>Institution</label>
+        <input type="text" class="form-control text-center" id="institution">
+    </div>
+    <div class="form-group text-center">
+        <label>Working from:</label>
+        <input type="number" class="form-control text-center" id="workingFrom">
+    </div>
+    <div class="from-group text-center">
+        <label>Working to:</label>
+        <input type="number" class="form-control text-center" id="workingTo">
+    </div>
+    <div class="text-center">
+        <input class="btn btn-primary" type="button" onclick="addDoctor()" value="Add">
+    </div>
 
 </div>
 
 
 <div class="form-group container text-center success-label">
     <div class="form-group text-center">
-    <label id="institution-label"></label><br>
-    <label id="specialization-label"></label>
+        <label id="institution-label"></label><br>
+        <label id="specialization-label"></label><br>
+        <label id="working-hours-label"></label>
     </div>
 </div>
 

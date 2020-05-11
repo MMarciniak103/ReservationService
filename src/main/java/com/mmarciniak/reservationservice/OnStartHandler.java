@@ -36,9 +36,9 @@ public class OnStartHandler {
         userRepository.save(userDtoBuilder.userToUserDto(userPojo2));
 
 
-        Doctor dentist = new Doctor("dentist","Dental Center");
-        Doctor pediatrician = new Doctor("pediatrician","City Hospital");
-        Doctor orthopaedist = new Doctor("orthopaedist","Sport Center");
+        Doctor dentist = new Doctor("dentist","Dental Center",7,15);
+        Doctor pediatrician = new Doctor("pediatrician","City Hospital",8,16);
+        Doctor orthopaedist = new Doctor("orthopaedist","Sport Center",9,20);
 
         Set<Doctor> doctors = new HashSet<>(){
             {

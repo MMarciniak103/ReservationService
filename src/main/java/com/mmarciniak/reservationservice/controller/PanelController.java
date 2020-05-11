@@ -119,6 +119,9 @@ public class PanelController {
             throw new AppointmentDateInvalid(appointment.getDate()+" "+appointment.getTime() + " is taken.");
         }
 
+        if((appointment.getTime().getHour() > doctor.get().getWorkingTo()) || (appointment.getTime().getHour() < doctor.get().getWorkingFrom())){
+            throw new AppointmentDateInvalid("Doctor doesnt work in this hours!");
+        }
 
         AppointmentDto appointmentDto = appointmentDtoBuilder.appointmentToDto(appointment);
 
@@ -148,5 +151,21 @@ public class PanelController {
 
     }
 
+    @RequestMapping(value = "/getDoctor",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getDoctor(@RequestBody Doctor doctor){
+
+        Optional<Doctor> byInstitutionAndSpecialization = doctorService.findByInstitutionAndSpecialization(doctor.getInstitution(), doctor.getSpecialization());
+
+        if(!byInstitutionAndSpecialization.isPresent()){
+            Map<String, String> result = new HashMap<>();
+            Gson gson = new Gson();
+            String status;
+            result.put("message","Doctor not found");
+            status = gson.toJson(result);
+            return new ResponseEntity(status, HttpStatus.BAD_REQUEST);
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(byInstitutionAndSpecialization.get());
+    }
 
 }

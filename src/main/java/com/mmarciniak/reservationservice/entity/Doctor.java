@@ -15,13 +15,26 @@ public class Doctor {
 
     private String institution;
 
+    @Column(name = "working_from")
+    private int workingFrom;
+
+    @Column(name = "working_to")
+    private int workingTo;
+
     public Doctor() {
     }
 
-    public Doctor(String specialization,String institution) {
+    public Doctor(String specialization, String institution, int workingFrom, int workingTo) {
         this.specialization = specialization;
         this.institution = institution;
+        this.workingFrom = workingFrom;
+        this.workingTo = workingTo;
     }
+
+//    public Doctor(String specialization, String institution) {
+//        this.specialization = specialization;
+//        this.institution = institution;
+//    }
 
     public Long getId() {
         return id;
@@ -45,5 +58,21 @@ public class Doctor {
 
     public void setInstitution(String institution) {
         this.institution = institution;
+    }
+
+    public int getWorkingFrom() {
+        return workingFrom;
+    }
+
+    public void setWorkingFrom(int workingFrom) {
+        this.workingFrom = workingFrom;
+    }
+
+    public int getWorkingTo() {
+        return workingTo;
+    }
+
+    public void setWorkingTo(int workingTo) {
+        this.workingTo = workingTo;
     }
 }
