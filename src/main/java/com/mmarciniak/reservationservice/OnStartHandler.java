@@ -27,28 +27,29 @@ public class OnStartHandler {
         this.doctorRepository = doctorRepository;
     }
 
-    @EventListener(ApplicationReadyEvent.class)
-    public void fill(){
-        UserPojo userPojo1 = new UserPojo("tom","123","ROLE_ADMIN");
-        UserPojo userPojo2 = new UserPojo("mark","123","ROLE_CUSTOMER");
-
-        userRepository.save(userDtoBuilder.userToUserDto(userPojo1));
-        userRepository.save(userDtoBuilder.userToUserDto(userPojo2));
-
-
-        Doctor dentist = new Doctor("dentist","Dental Center",7,15);
-        Doctor pediatrician = new Doctor("pediatrician","City Hospital",8,16);
-        Doctor orthopaedist = new Doctor("orthopaedist","Sport Center",9,20);
-
-        Set<Doctor> doctors = new HashSet<>(){
-            {
-                add(dentist);
-                add(pediatrician);
-                add(orthopaedist);
-            }
-        };
-
-        doctorRepository.saveAll(doctors);
-
-    }
+    //Uncomment if you want to fill database
+//    @EventListener(ApplicationReadyEvent.class)
+//    public void fill(){
+//        UserPojo userPojo1 = new UserPojo("tom","123","ROLE_ADMIN");
+//        UserPojo userPojo2 = new UserPojo("mark","123","ROLE_CUSTOMER");
+//
+//        userRepository.save(userDtoBuilder.userToUserDto(userPojo1));
+//        userRepository.save(userDtoBuilder.userToUserDto(userPojo2));
+//
+//
+//        Doctor dentist = new Doctor("dentist","Dental Center",7,15);
+//        Doctor pediatrician = new Doctor("pediatrician","City Hospital",8,16);
+//        Doctor orthopaedist = new Doctor("orthopaedist","Sport Center",9,20);
+//
+//        Set<Doctor> doctors = new HashSet<>(){
+//            {
+//                add(dentist);
+//                add(pediatrician);
+//                add(orthopaedist);
+//            }
+//        };
+//
+//        doctorRepository.saveAll(doctors);
+//
+//    }
 }
