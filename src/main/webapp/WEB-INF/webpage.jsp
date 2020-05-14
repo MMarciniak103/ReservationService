@@ -56,16 +56,16 @@
                 <h2>Make an appointment</h2>
                 <p>Doctor Specialization</p>
                 <select class="custom-select" id="specialization">
-                    <c:forEach var="doctor" items="${doctors}">
-                        <option value="${doctor.getSpecialization()}">${doctor.getSpecialization()}</option>
+                    <c:forEach var="specialization" items="${specializations}">
+                        <option value="${specialization}">${specialization}</option>
                     </c:forEach>
                 </select>
                 <p>Date</p>
                 <input type="date" id="date"/>
                 <p>Institution</p>
                 <select class="custom-select" id="institution">
-                    <c:forEach var="doctor" items="${doctors}">
-                        <option value="${doctor.getInstitution()}">${doctor.getInstitution()}</option>
+                    <c:forEach var="institution" items="${institutions}">
+                        <option value="${institution}">${institution}</option>
                     </c:forEach>
                 </select>
                 <input type="button" class="btn btn-light" onclick="chooseTime()" value="Confirm"/>

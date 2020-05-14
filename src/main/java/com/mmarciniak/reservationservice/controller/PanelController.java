@@ -39,24 +39,33 @@ public class PanelController {
     }
 
     @RequestMapping("/")
-    public String loadMainPage(Model model,HttpServletRequest httpServletRequest) {
+    public String loadMainPage(Model model, HttpServletRequest httpServletRequest) {
         List<Doctor> doctors = doctorService.findAll();
         model.addAttribute("doctors", doctors);
 
+        Set institutions = new HashSet();
+        Set specializations = new HashSet();
 
+        doctors.forEach((x) -> {
+            institutions.add(x.getInstitution());
+            specializations.add(x.getSpecialization());
+        });
+
+        model.addAttribute("institutions",institutions);
+        model.addAttribute("specializations",specializations);
         return "webpage";
     }
 
-    private List<AppointmentDto> getUserAppointments(UserDto user){
+    private List<AppointmentDto> getUserAppointments(UserDto user) {
 
         List<AppointmentDto> userAppointments = appointmentService.findUserAppointments(user);
         return userAppointments;
     }
 
 
-    @RequestMapping(value = "/getAppointments/{userName}",method = RequestMethod.GET)
+    @RequestMapping(value = "/getAppointments/{userName}", method = RequestMethod.GET)
     @ResponseBody
-    public List<AppointmentDto> getAppointments(@PathVariable String userName){
+    public List<AppointmentDto> getAppointments(@PathVariable String userName) {
         UserDto user = userService.getUserByName(userName).get();
         List<AppointmentDto> userAppointments = getUserAppointments(user);
 
@@ -64,9 +73,9 @@ public class PanelController {
     }
 
 
-    @RequestMapping(value = "/cancelAppointment/{id}",method = RequestMethod.DELETE)
-    public ResponseEntity cancelAppointment(@PathVariable Long id){
-            appointmentService.deleteAppointmentById(id);
+    @RequestMapping(value = "/cancelAppointment/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity cancelAppointment(@PathVariable Long id) {
+        appointmentService.deleteAppointmentById(id);
         return new ResponseEntity(HttpStatus.OK);
     }
 
@@ -82,10 +91,10 @@ public class PanelController {
         Gson gson = new Gson();
         String status;
 
-        if(appointment.getTime() == null || appointment.getDate() == null){
-            result.put("message","You must provide date and time");
+        if (appointment.getTime() == null || appointment.getDate() == null) {
+            result.put("message", "You must provide date and time");
             status = gson.toJson(result);
-            return new ResponseEntity(status,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(status, HttpStatus.BAD_REQUEST);
         }
 
 
@@ -106,6 +115,22 @@ public class PanelController {
     }
 
 
+    @RequestMapping(value = "/validate",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity validateAppointmentRequest(@RequestBody AppointmentPojo appointmentPojo){
+        Map<String, String> result = new HashMap<>();
+        Gson gson = new Gson();
+        String status;
+
+        try{
+            validateAppointment(appointmentPojo);
+        } catch (AppointmentDateInvalid | InvalidDoctorInfo error) {
+            result.put("message", error.getMessage());
+            status = gson.toJson(result);
+            return new ResponseEntity(status, HttpStatus.BAD_REQUEST);
+        }
+        return  new ResponseEntity(HttpStatus.OK);
+    }
+
     private AppointmentDto validateAppointment(AppointmentPojo appointment) throws AppointmentDateInvalid, InvalidDoctorInfo {
         String specialization = appointment.getSpecialization();
         String institution = appointment.getInstitution();
@@ -114,13 +139,15 @@ public class PanelController {
             throw new InvalidDoctorInfo("There is no " + specialization + " working in " + institution);
         }
 
-        Optional<AppointmentDto> appointmentByDoctor = appointmentService.findAppointmentByDoctorAndDateAndTime(doctor.get(), appointment.getDate(),appointment.getTime());
+        Optional<AppointmentDto> appointmentByDoctor = appointmentService.findAppointmentByDoctorAndDateAndTime(doctor.get(), appointment.getDate(), appointment.getTime());
         if (appointmentByDoctor.isPresent()) {
-            throw new AppointmentDateInvalid(appointment.getDate()+" "+appointment.getTime() + " is taken.");
+            throw new AppointmentDateInvalid(appointment.getDate() + " " + appointment.getTime() + " is taken.");
         }
 
-        if((appointment.getTime().getHour() > doctor.get().getWorkingTo()) || (appointment.getTime().getHour() < doctor.get().getWorkingFrom())){
-            throw new AppointmentDateInvalid("Doctor doesnt work in this hours!");
+        if(appointment.getTime() != null) {
+            if ((appointment.getTime().getHour() > doctor.get().getWorkingTo()) || (appointment.getTime().getHour() < doctor.get().getWorkingFrom())) {
+                throw new AppointmentDateInvalid("Doctor doesnt work in this hours!");
+            }
         }
 
         AppointmentDto appointmentDto = appointmentDtoBuilder.appointmentToDto(appointment);
@@ -130,37 +157,37 @@ public class PanelController {
     }
 
 
-    @RequestMapping(value = "/timePanel",method = RequestMethod.GET)
-    public String getTimePanel(){
+    @RequestMapping(value = "/timePanel", method = RequestMethod.GET)
+    public String getTimePanel() {
         return "chooseTimePanel";
     }
 
 
-    @RequestMapping(value = "/availableHours",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/availableHours", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<AppointmentDto> getAvailableHours(@RequestBody AppointmentPojo appointmentPojo){
+    public List<AppointmentDto> getAvailableHours(@RequestBody AppointmentPojo appointmentPojo) {
 
-        Optional<Doctor> doctor = doctorService.findByInstitutionAndSpecialization(appointmentPojo.getInstitution(),appointmentPojo.getSpecialization());
+        Optional<Doctor> doctor = doctorService.findByInstitutionAndSpecialization(appointmentPojo.getInstitution(), appointmentPojo.getSpecialization());
 
-        if(doctor.isPresent()) {
-            List<AppointmentDto> appointmentsByDate = appointmentService.findAppointmentsByDateAndDoctor(appointmentPojo.getDate(),doctor.get());
-            return  appointmentsByDate;
+        if (doctor.isPresent()) {
+            List<AppointmentDto> appointmentsByDate = appointmentService.findAppointmentsByDateAndDoctor(appointmentPojo.getDate(), doctor.get());
+            return appointmentsByDate;
         }
 
         return new ArrayList<AppointmentDto>();
 
     }
 
-    @RequestMapping(value = "/getDoctor",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getDoctor(@RequestBody Doctor doctor){
+    @RequestMapping(value = "/getDoctor", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getDoctor(@RequestBody Doctor doctor) {
 
         Optional<Doctor> byInstitutionAndSpecialization = doctorService.findByInstitutionAndSpecialization(doctor.getInstitution(), doctor.getSpecialization());
 
-        if(!byInstitutionAndSpecialization.isPresent()){
+        if (!byInstitutionAndSpecialization.isPresent()) {
             Map<String, String> result = new HashMap<>();
             Gson gson = new Gson();
             String status;
-            result.put("message","Doctor not found");
+            result.put("message", "Doctor not found");
             status = gson.toJson(result);
             return new ResponseEntity(status, HttpStatus.BAD_REQUEST);
         }
