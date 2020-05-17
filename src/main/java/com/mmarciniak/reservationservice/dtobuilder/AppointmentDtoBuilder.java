@@ -12,8 +12,7 @@ public class AppointmentDtoBuilder {
         AppointmentDto appointmentDto = new AppointmentDto();
         appointmentDto.setDate(appointment.getDate());
         appointmentDto.setTime(appointment.getTime());
-        appointment.setInstitution(appointment.getInstitution());
-        appointment.setSpecialization(appointment.getSpecialization());
+        appointmentDto.setStatus(appointment.getStatus());
 
         return appointmentDto;
     }

@@ -23,17 +23,19 @@ public class AppointmentDto {
 
     private LocalDate date;
     private LocalTime time;
-
+    private String status;
 
     public AppointmentDto() {
     }
 
-    public AppointmentDto(Long id, UserDto userDto, Doctor doctor, LocalDate date, LocalTime time) {
+
+    public AppointmentDto(Long id, UserDto userDto, Doctor doctor, LocalDate date, LocalTime time, String status) {
         this.id = id;
         this.userDto = userDto;
         this.doctor = doctor;
         this.date = date;
         this.time = time;
+        this.status = status;
     }
 
     public Long getId() {
@@ -75,5 +77,13 @@ public class AppointmentDto {
 
     public void setTime(LocalTime time) {
         this.time = time;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

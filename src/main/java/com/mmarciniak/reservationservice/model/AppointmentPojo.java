@@ -10,15 +10,17 @@ public class AppointmentPojo {
     private LocalDate date;
     private LocalTime time;
     private String institution;
+    private String status;
 
     public AppointmentPojo() {
     }
 
-    public AppointmentPojo(String specialization, LocalDate date, String institution,LocalTime time) {
+    public AppointmentPojo(String specialization, LocalDate date, LocalTime time, String institution, String status) {
         this.specialization = specialization;
         this.date = date;
         this.time = time;
         this.institution = institution;
+        this.status = status;
     }
 
     public String getSpecialization() {
@@ -51,5 +53,13 @@ public class AppointmentPojo {
 
     public void setTime(LocalTime time) {
         this.time = time;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

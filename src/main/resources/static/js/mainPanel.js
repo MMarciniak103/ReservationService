@@ -74,7 +74,11 @@ function populateTable(data) {
 
         let institutionCell = row.insertCell(2);
         institutionCell.innerText = value.doctor.institution;
-        let cancelCell = row.insertCell(3);
+
+        let statusCell = row.insertCell(3);
+        statusCell.innerText = value.status;
+
+        let cancelCell = row.insertCell(4);
 
 
         let cancelBtn = document.createElement("input");
@@ -213,7 +217,8 @@ function confirmTime() {
         specialization: specialization.value,
         date: date.value,
         time: time.value,
-        institution: institution.value
+        institution: institution.value,
+        status:'active'
     });
 
     $("#time-panel").empty();
