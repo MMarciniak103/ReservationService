@@ -20,4 +20,5 @@ public interface AppointmentService{
     List<AppointmentDto> findUserAppointments(UserDto user);
     List<AppointmentDto> findAppointmentsByDateAndDoctor(LocalDate date,Doctor doctor);
     void deleteAppointmentById(Long id);
+
 }
